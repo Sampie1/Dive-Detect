@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     textDecorationLine: 'underline', // Voeg onderstreping toe
-    marginVertical: 10, // Ruimte tussen de links
+    marginVertical: 80, // Ruimte tussen de links
     
   },
 
