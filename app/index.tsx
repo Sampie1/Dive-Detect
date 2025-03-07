@@ -1,34 +1,58 @@
-import React from "react";
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from "react-native";
+// app/index.tsx
+import React from 'react';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
+import GameScreen from './screens/GameScreen';  // Update naar ./screens/
+
+// Types voor navigatie
+type RootStackParamList = {
+  Home: undefined;
+  GameScreen: undefined;
+};
+
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 export default function Index() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="GameScreen" component={GameScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+function HomeScreen({ navigation }: { navigation: HomeScreenNavigationProp }) {
+  // Verplaats de handleLinkPress-functie naar binnen de HomeScreen component
   const handleLinkPress = (linkType: string) => {
-    console.log(`${linkType} link clicked`);
-    // Hier kan je navigeren naar andere schermen of acties toevoegen
+    if (linkType === "Onderzoeken") {
+      navigation.navigate('GameScreen');
+    } else {
+      console.log(`${linkType} link clicked`);
+    }
   };
 
   return (
     <View style={styles.container}>
-      {/* Geanimeerde Onderwater GIF Achtergrond */}
       <ImageBackground
-        source={require('../assets/onderwater.gif')} // Vervang met jouw eigen GIF bestand
+        source={require('../assets/onderwater.gif')}
         style={styles.background}
       >
-        {/* Overlay voor de links */}
         <View style={styles.overlay}>
           <Text style={styles.title}>DIVE + DETECT</Text>
-          
-          {/* Onderzoeken link */}
+
           <TouchableOpacity onPress={() => handleLinkPress("Onderzoeken")}>
             <Text style={styles.link}>Onderzoeken</Text>
           </TouchableOpacity>
 
-          {/* Collectie link */}
           <TouchableOpacity onPress={() => handleLinkPress("Collectie")}>
             <Text style={styles.link}>Collectie</Text>
           </TouchableOpacity>
 
-          {/* Badges link */}
           <TouchableOpacity onPress={() => handleLinkPress("Badges")}>
             <Text style={styles.link}>Badges</Text>
           </TouchableOpacity>
@@ -51,7 +75,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     alignItems: "center",
-    zIndex: 1, // Zorg ervoor dat de links boven de GIF komen
+    zIndex: 1,
   },
   title: {
     fontSize: 30,
@@ -65,18 +89,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     height: "100%",
+    resizeMode: "cover",
   },
   link: {
-    marginTop: 40,
-    color: "#fff", // Witte tekstkleur
-    fontSize: 28,
-    fontWeight: "bold",
-    textDecorationLine: 'underline', // Voeg onderstreping toe
-    marginVertical: 80, // Ruimte tussen de links
-    
+    fontSize: 20,
+    color: "#fff",
+    marginVertical: 10,
+    textDecorationLine: "underline",
   },
-
-  viewStyle : {
-    paddingBottom: 4,
-  }
 });
