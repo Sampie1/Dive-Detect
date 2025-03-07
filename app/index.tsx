@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     color: "#fff",
-    marginBottom: 30,
+    marginBottom: 100,
     fontWeight: "bold",
   },
   background: {
@@ -97,4 +97,15 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     textDecorationLine: "underline",
   },
+    marginTop: 40,
+    color: "#fff", // Witte tekstkleur
+    fontSize: 28,
+    fontWeight: "bold",
+    textDecorationLine: 'underline', // Voeg onderstreping toe
+    
+  },
+
+  viewStyle : {
+    paddingBottom: 4,
+  }
 });
