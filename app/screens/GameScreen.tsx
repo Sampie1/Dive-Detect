@@ -21,14 +21,14 @@ export default function GameScreen() {
 
   // Parallax layers, met verschillende snelheden
   const parallaxLayers = [
-    require('../assets/parallax/1.jpeg'),
-    require('../assets/parallax/2.jpeg'),
-    require('../assets/parallax/3.jpeg'),
-    require('../assets/parallax/4.jpeg'),
-    require('../assets/parallax/5.jpeg'),
-    require('../assets/parallax/6.jpeg'),
-    require('../assets/parallax/7.jpeg'),
-    require('../assets/parallax/8.jpeg'),
+    require('@/assets/parallax/1.jpeg'),
+    require('@/assets/parallax/2.jpeg'),
+    require('@/assets/parallax/3.jpeg'),
+    require('@/assets/parallax/4.jpeg'),
+    require('@/assets/parallax/5.jpeg'),
+    require('@/assets/parallax/6.jpeg'),
+    require('@/assets/parallax/7.jpeg'),
+    require('@/assets/parallax/8.jpeg'),
   ];
 
   return (
@@ -53,12 +53,6 @@ export default function GameScreen() {
         />
       ))}
 
-      {/* Duiker */}
-      <Animated.View
-        {...panResponder.panHandlers}
-        style={[styles.diver, { transform: [{ translateX: diverPosition.x }, { translateY: diverPosition.y }] }]}>
-        <Image source={require('../assets/diver.png')} style={styles.diverImage} />
-      </Animated.View>
     </View>
   );
 }
