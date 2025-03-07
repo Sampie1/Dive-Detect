@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     color: "#fff",
-    marginBottom: 30,
+    marginBottom: 100,
     fontWeight: "bold",
   },
   background: {
@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     textDecorationLine: 'underline', // Voeg onderstreping toe
-    marginVertical: 80, // Ruimte tussen de links
     
   },
 
