@@ -96,16 +96,8 @@ const styles = StyleSheet.create({
     color: "#fff",
     marginVertical: 10,
     textDecorationLine: "underline",
-  },
     marginTop: 40,
-    color: "#fff", // Witte tekstkleur
-    fontSize: 28,
     fontWeight: "bold",
-    textDecorationLine: 'underline', // Voeg onderstreping toe
-    
   },
-
-  viewStyle : {
-    paddingBottom: 4,
-  }
-});
+  },
+);
