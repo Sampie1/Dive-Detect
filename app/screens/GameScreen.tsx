@@ -1,58 +1,52 @@
-import React, { useState } from 'react';
-import { View, Image, StyleSheet, PanResponder, Animated, Dimensions, ImageBackground } from 'react-native';
+import React, { useRef } from 'react';
+import { View, Animated, PanResponder, StyleSheet } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
+// Define the path for the background asset
+const oceanBackground = require('@/assets/onderwater.gif');
 
 export default function GameScreen() {
-  // Duikerpositie op de zeebodem
-  const [diverPosition] = useState(new Animated.ValueXY({ x: width / 2, y: height / 2 }));
+  // Animated value for light position
+  const lightPosition = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
 
-  // PanResponder voor het slepen van de duiker
-  const panResponder = PanResponder.create({
-    onMoveShouldSetPanResponder: () => true,
-    onPanResponderMove: Animated.event([null, { dx: diverPosition.x, dy: diverPosition.y }], { useNativeDriver: false }),
-    onPanResponderRelease: () => {
-      Animated.spring(diverPosition, {
-        toValue: { x: 0, y: 0 },
-        useNativeDriver: false,
-      }).start();
-    },
-  });
-
-  // Parallax layers, met verschillende snelheden
-  const parallaxLayers = [
-    require('@/assets/parallax/1.jpeg'),
-    require('@/assets/parallax/2.jpeg'),
-    require('@/assets/parallax/3.jpeg'),
-    require('@/assets/parallax/4.jpeg'),
-    require('@/assets/parallax/5.jpeg'),
-    require('@/assets/parallax/6.jpeg'),
-    require('@/assets/parallax/7.jpeg'),
-    require('@/assets/parallax/8.jpeg'),
-  ];
+  // PanResponder to detect player movement
+  const panResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderMove: (evt, gestureState) => {
+        // Update the light position based on the exact finger coordinates
+        Animated.timing(lightPosition, {
+          toValue: { x: gestureState.moveX, y: gestureState.moveY },
+          duration: 0, // No delay for smooth tracking
+          useNativeDriver: false,
+        }).start();
+      },
+      onPanResponderRelease: () => {
+        // Optional: handle when the touch is released if needed
+      },
+    })
+  ).current;
 
   return (
     <View style={styles.container}>
-      {parallaxLayers.map((layer, index) => (
-        <Animated.Image
-          key={index}
-          source={layer}
-          style={[
-            styles.parallaxLayer,
-            {
-              transform: [
-                {
-                  translateY: diverPosition.y.interpolate({
-                    inputRange: [-height, 0, height],
-                    outputRange: [-(index * 50), 0, index * 50], // Hoe verder de index, hoe langzamer de laag beweegt
-                  }),
-                },
-              ],
-            },
-          ]}
-        />
-      ))}
+      {/* Background image */}
+      <Animated.Image source={oceanBackground} style={styles.background} />
 
+      {/* Animated light effect */}
+      <Animated.View
+        style={[
+          styles.light,
+          {
+            transform: [
+              { translateX: lightPosition.x }, // Follow X coordinate
+              { translateY: lightPosition.y }, // Follow Y coordinate
+            ],
+          },
+        ]}
+        {...panResponder.panHandlers} // Attach the PanResponder to the light view
+      >
+        {/* Light effect (beam or circle) */}
+        <View style={styles.lightBeam} />
+      </Animated.View>
     </View>
   );
 }
@@ -60,21 +54,31 @@ export default function GameScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  parallaxLayer: {
+  background: {
     position: 'absolute',
     width: '100%',
     height: '100%',
     resizeMode: 'cover',
   },
-  diver: {
+  light: {
+    width: 200,
+    height: 200,
     position: 'absolute',
-    width: 100, // Breedte van de duiker
-    height: 100, // Hoogte van de duiker
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  diverImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'contain',
+  lightBeam: {
+    width: 300,
+    height: 150,
+    borderRadius: 150,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    shadowColor: 'rgba(255, 255, 255, 0.8)',
+    shadowOpacity: 0.6,
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 30,
   },
 });
