@@ -1,18 +1,29 @@
-// app/index.tsx
-import React from 'react';
-import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
-import GameScreen from './screens/GameScreen';  // Update naar ./screens/
-import  HomeScreen  from './screens/HomeScreen';
-import BadgesScreen  from './screens/BadgeScherm'
-
-const Stack = createStackNavigator();
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import GameScreen from './screens/GameScreen';
+import HomeScreen from './screens/HomeScreen';
+import BadgesScreen from './screens/BadgeScherm';
 
 export default function App() {
+  const [activeTab, setActiveTab] = useState('Home');
+
+  const renderScreen = () => {
+    switch (activeTab) {
+      case 'Home':
+        return <HomeScreen setActiveTab={setActiveTab} />;
+      case 'GameScreen':
+        return <GameScreen />;
+      case 'BadgeScherm':
+        return <BadgesScreen />;
+      default:
+        return <HomeScreen setActiveTab={setActiveTab} />;
+    }
+  };
+
   return (
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="GameScreen" component={GameScreen} />
-        <Stack.Screen name="BadgeScherm" component={BadgesScreen} />
-      </Stack.Navigator>
+    <View style={{ flex: 1 }}>
+      {/* Render the current active screen */}
+      {renderScreen()}
+    </View>
   );
 }

@@ -19,7 +19,7 @@ export const BadgeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     return (
         <BadgeContext.Provider value={{badges, unlockBadge}}>
-            {children} 
+            {children}  
         </BadgeContext.Provider>
     );
 };
@@ -28,6 +28,6 @@ export const useBadges = () => {
     const context = useContext(BadgeContext);
 
     if (!context) throw new Error('blablabla')
-        
+
     return context;
 }
