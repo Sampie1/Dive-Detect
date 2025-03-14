@@ -26,6 +26,8 @@ export const BadgeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
 export const useBadges = () => {
     const context = useContext(BadgeContext);
+
     if (!context) throw new Error('blablabla')
+        
     return context;
 }

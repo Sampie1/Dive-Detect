@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import { useBadges } from "../badges/BadgeContext";
 
-const BadgesScreen = () => {
+export default function BadgesScreen()  {
     const { badges } = useBadges();
 
     return (
@@ -29,4 +29,3 @@ const BadgesScreen = () => {
 
 const styles = StyleSheet.create({})
 
-export default BadgesScreen;
