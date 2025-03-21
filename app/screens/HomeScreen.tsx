@@ -19,14 +19,6 @@ export default function HomeScreen({ setActiveTab }: HomeScreenProps) {
           <TouchableOpacity onPress={() => setActiveTab('GameScreen')}>
             <Text style={styles.link}>Onderzoeken</Text>
           </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => setActiveTab('Home')}>
-            <Text style={styles.link}>Collectie</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => setActiveTab('BadgeScherm')}>
-            <Text style={styles.link}>Badges</Text>
-          </TouchableOpacity>
         </View>
       </ImageBackground>
     </View>

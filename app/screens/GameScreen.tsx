@@ -9,6 +9,10 @@ const fishImages = [
   require('@/assets/fish1.png'),
   require('@/assets/fish2.png'),
   require('@/assets/fish3.png'),
+  require('@/assets/fish4.png'),
+  require('@/assets/fish5.png'),
+  require('@/assets/fish6.png'),
+  require('@/assets/fish7.png'),
 ];
 
 // Type voor een visobject
