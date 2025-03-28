@@ -104,9 +104,21 @@ export default function GameScreen() {
 
       {/* Sleepbare lichtcirkel */}
       <View
-        style={[styles.light, { left: position.x - lightRadius / 2, top: position.y - lightRadius / 2 }]}
-        {...panResponder.panHandlers} // PanResponder koppelen
-      />
+  style={[
+    styles.light,
+    { left: position.x - lightRadius / 2, top: position.y - lightRadius / 2 },
+    {
+      shadowColor: '#fff',
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 1,
+      shadowRadius: lightRadius / 2,
+      borderColor: 'rgba(255, 255, 200, 0.1)', // Zachte randkleur
+      borderWidth: 1, // Dikte van de rand
+    },
+  ]}
+  {...panResponder.panHandlers} // PanResponder koppelen
+/>
+
 
       {/* Toon de gevangen vis en de knop */}
       {selectedFish && (
@@ -133,12 +145,17 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   light: {
-    width: 100,
-    height: 100,
+    width: 250, // Grotere straal voor het lichteffect
+    height: 150,
     position: 'absolute',
-    borderRadius: 50,
-    backgroundColor: 'rgba(255, 255, 200, 0.3)',
-  },
+    borderRadius: 50, // Cirkelvormig
+    backgroundColor: 'rgba(255, 255, 255, 0.2)', // Zachtere, lichtere kern
+    shadowColor: 'rgba(255, 255, 255, 0.8)', // Helderdere kern van het licht
+    shadowOpacity: 1,
+    shadowRadius: 150, // Vergroot de schaduwradius voor een zachtere rand
+    shadowOffset: { width: 0, height: 0 }, // Geen verschuiving van de schaduw
+    elevation: 10, // Zorgen voor een 3D-effect op Android
+  },  
   fish: {
     width: 50,
     height: 50,

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import GameScreen from './screens/GameScreen';
 import HomeScreen from './screens/HomeScreen';
-import BadgesScreen from './screens/BadgeScherm';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('Home');
@@ -13,10 +12,6 @@ export default function App() {
         return <HomeScreen setActiveTab={setActiveTab} />;
       case 'GameScreen':
         return <GameScreen />;
-      case 'BadgeScherm':
-        return <BadgesScreen />;
-      default:
-        return <HomeScreen setActiveTab={setActiveTab} />;
     }
   };
 
