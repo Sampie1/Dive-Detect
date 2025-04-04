@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { View, Image, StyleSheet, PanResponder, Dimensions, Text, TouchableOpacity } from 'react-native';
 
-// Achtergrondafbeelding
 const oceanBackground = require('@/assets/onderwater.gif');
 
 // Lijst met visafbeeldingen
@@ -13,6 +12,11 @@ const fishImages = [
   require('@/assets/fish5.png'),
   require('@/assets/fish6.png'),
   require('@/assets/fish7.png'),
+  require('@/assets/fish8.png'),
+  require('@/assets/fish9.png'),
+  require('@/assets/fish10.png'),
+  require('@/assets/fish11.png'),
+  require('@/assets/fish12.png'),
 ];
 
 // Type voor een visobject
@@ -24,7 +28,6 @@ type Fish = {
   id: string; // Unieke id voor elke vis
 };
 
-// Haal schermbreedte en -hoogte op
 const { width, height } = Dimensions.get('window');
 
 export default function GameScreen() {
@@ -123,7 +126,7 @@ export default function GameScreen() {
       {/* Toon de gevangen vis en de knop */}
       {selectedFish && (
         <View style={styles.infoBox}>
-          <Text style={styles.text}>Je hebt een vis gevangen!</Text>
+          <Text style={styles.text}>Je hebt iets gevangen!</Text>
           <Image source={selectedFish.image} style={styles.selectedFishImage} />
           <TouchableOpacity onPress={handleSendToScientist} style={styles.button}>
             <Text style={styles.buttonText}>Verstuur naar de wetenschapper</Text>
@@ -145,10 +148,10 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   light: {
-    width: 250, // Grotere straal voor het lichteffect
-    height: 150,
+    width: 200, // Grotere straal voor het lichteffect
+    height: 120,
     position: 'absolute',
-    borderRadius: 50, // Cirkelvormig
+    borderRadius: 35, // Cirkelvormig
     backgroundColor: 'rgba(255, 255, 255, 0.2)', // Zachtere, lichtere kern
     shadowColor: 'rgba(255, 255, 255, 0.8)', // Helderdere kern van het licht
     shadowOpacity: 1,
